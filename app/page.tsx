@@ -62,7 +62,7 @@ function HomeContent() {
       )}
 
       <div className="bg-blue-900/30 border border-blue-800 rounded-md p-4 mb-8 text-sm text-blue-200">
-        <strong>How it works:</strong> Subscribe with your email below. We'll automatically
+        <strong>How it works:</strong> Subscribe with your email below. We&apos;ll automatically
         check stock every 15 minutes and email you when items come back in stock.
       </div>
 

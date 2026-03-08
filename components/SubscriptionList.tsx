@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Subscription {
   id: string;
@@ -21,13 +21,7 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (email && email.includes('@')) {
-      fetchSubscriptions();
-    }
-  }, [email]);
-
-  const fetchSubscriptions = async () => {
+  const fetchSubscriptions = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -44,7 +38,13 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [email]);
+
+  useEffect(() => {
+    if (email && email.includes('@')) {
+      fetchSubscriptions();
+    }
+  }, [email, fetchSubscriptions]);
 
   const handleUnsubscribe = async (subscriptionId: string, token: string) => {
     if (!confirm('Are you sure you want to unsubscribe?')) {
