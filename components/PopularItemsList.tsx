@@ -103,27 +103,27 @@ export default function PopularItemsList() {
           >
             <button
               onClick={() => toggleExpanded(item.product_url)}
-              className="w-full text-left flex justify-between items-center p-4 hover:bg-neutral-800/50 transition-colors rounded-md"
+              className="w-full text-left flex justify-between items-start gap-2 p-3 sm:p-4 hover:bg-neutral-800/50 transition-colors rounded-md"
             >
-              <h3 className="font-semibold text-white">
+              <h3 className="font-semibold text-white text-sm sm:text-base">
                 {item.product_name}{' '}
-                <span className="text-neutral-400 font-normal text-sm">
+                <span className="text-neutral-400 font-normal text-xs sm:text-sm">
                   ({item.subscription_count} subscribers)
                 </span>
               </h3>
-              <span className="text-neutral-500 ml-2">{isExpanded ? '−' : '+'}</span>
+              <span className="text-neutral-500 flex-shrink-0">{isExpanded ? '−' : '+'}</span>
             </button>
 
             {isExpanded && (
-              <div className="px-4 pb-4 space-y-4 border-t border-neutral-800">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                  <div>
+              <div className="px-3 sm:px-4 pb-3 sm:pb-4 space-y-4 border-t border-neutral-800">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 sm:pt-4">
+                  <div className="min-w-0">
                     <p className="text-sm font-medium text-neutral-400 mb-1">Product URL:</p>
                     <a
                       href={item.product_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-400 hover:underline break-all text-sm"
+                      className="text-blue-400 hover:underline break-all text-xs sm:text-sm"
                     >
                       {item.product_url}
                     </a>
@@ -149,28 +149,30 @@ export default function PopularItemsList() {
                           <div key={color}>
                             <p className="font-medium text-neutral-300 text-sm">{color}</p>
                             {Object.keys(sizeTimes).length > 0 ? (
-                              <table className="w-full mt-1 text-sm">
-                                <thead>
-                                  <tr className="border-b border-neutral-700">
-                                    <th className="text-left py-1 text-neutral-400 font-medium">Size</th>
-                                    <th className="text-left py-1 text-neutral-400 font-medium">Last In Stock</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {Object.entries(sizeTimes)
-                                    .sort((a, b) => {
-                                      const timeA = a[1] || '';
-                                      const timeB = b[1] || '';
-                                      return timeB.localeCompare(timeA);
-                                    })
-                                    .map(([size, timestamp]) => (
-                                      <tr key={size} className="border-b border-neutral-800">
-                                        <td className="py-1 text-neutral-300">{size === 'null' ? 'N/A' : size}</td>
-                                        <td className="py-1 text-neutral-300">{formatDate(timestamp)}</td>
-                                      </tr>
-                                    ))}
-                                </tbody>
-                              </table>
+                              <div className="overflow-x-auto -mx-3 sm:mx-0">
+                                <table className="w-full mt-1 text-sm min-w-[280px]">
+                                  <thead>
+                                    <tr className="border-b border-neutral-700">
+                                      <th className="text-left py-1 px-3 sm:px-0 text-neutral-400 font-medium">Size</th>
+                                      <th className="text-left py-1 px-3 sm:px-0 text-neutral-400 font-medium">Last In Stock</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {Object.entries(sizeTimes)
+                                      .sort((a, b) => {
+                                        const timeA = a[1] || '';
+                                        const timeB = b[1] || '';
+                                        return timeB.localeCompare(timeA);
+                                      })
+                                      .map(([size, timestamp]) => (
+                                        <tr key={size} className="border-b border-neutral-800">
+                                          <td className="py-1 px-3 sm:px-0 text-neutral-300">{size === 'null' ? 'N/A' : size}</td>
+                                          <td className="py-1 px-3 sm:px-0 text-neutral-300 whitespace-nowrap">{formatDate(timestamp)}</td>
+                                        </tr>
+                                      ))}
+                                  </tbody>
+                                </table>
+                              </div>
                             ) : (
                               <p className="text-sm text-neutral-500">No stock history available</p>
                             )}
@@ -178,28 +180,30 @@ export default function PopularItemsList() {
                         ))}
                       </div>
                     ) : (
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-neutral-700">
-                            <th className="text-left py-1 text-neutral-400 font-medium">Color</th>
-                            <th className="text-left py-1 text-neutral-400 font-medium">Last In Stock</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Object.entries(item.last_in_stock_times).map(([color, sizeTimes]) => {
-                            const timestamps = Object.values(sizeTimes).filter(Boolean);
-                            const latest = timestamps.length > 0 ? timestamps[0] : null;
-                            const nullTimestamp = sizeTimes['null'];
-                            const displayTimestamp = latest || nullTimestamp || null;
-                            return (
-                              <tr key={color} className="border-b border-neutral-800">
-                                <td className="py-1 text-neutral-300">{color}</td>
-                                <td className="py-1 text-neutral-300">{formatDate(displayTimestamp || undefined)}</td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                      <div className="overflow-x-auto -mx-3 sm:mx-0">
+                        <table className="w-full text-sm min-w-[280px]">
+                          <thead>
+                            <tr className="border-b border-neutral-700">
+                              <th className="text-left py-1 px-3 sm:px-0 text-neutral-400 font-medium">Color</th>
+                              <th className="text-left py-1 px-3 sm:px-0 text-neutral-400 font-medium">Last In Stock</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Object.entries(item.last_in_stock_times).map(([color, sizeTimes]) => {
+                              const timestamps = Object.values(sizeTimes).filter(Boolean);
+                              const latest = timestamps.length > 0 ? timestamps[0] : null;
+                              const nullTimestamp = sizeTimes['null'];
+                              const displayTimestamp = latest || nullTimestamp || null;
+                              return (
+                                <tr key={color} className="border-b border-neutral-800">
+                                  <td className="py-1 px-3 sm:px-0 text-neutral-300">{color}</td>
+                                  <td className="py-1 px-3 sm:px-0 text-neutral-300 whitespace-nowrap">{formatDate(displayTimestamp || undefined)}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     )}
                   </div>
                 )}

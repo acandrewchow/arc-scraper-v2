@@ -3,23 +3,23 @@
 export default function TutorialPage() {
   return (
     <>
-      <h1 className="text-3xl font-bold mb-2">How to Subscribe</h1>
-      <p className="text-neutral-400 mb-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">How to Subscribe</h1>
+      <p className="text-neutral-400 mb-4 sm:mb-6 text-sm sm:text-base">
         Learn how to subscribe to Arc&apos;teryx stock alerts in just a few simple steps.
       </p>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 space-y-8">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6 space-y-6 sm:space-y-8">
         <div>
-          <h3 className="text-lg font-semibold text-white mb-2">Step 1: Enter Your Email Address</h3>
-          <p className="text-neutral-400 mb-3">
+          <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Step 1: Enter Your Email Address</h3>
+          <p className="text-neutral-400 mb-3 text-sm sm:text-base">
             Start by entering your email address where you&apos;d like to receive stock notifications.
           </p>
-          <div className="bg-neutral-800 p-4 rounded-md">
+          <div className="bg-neutral-800 p-3 sm:p-4 rounded-md">
             <input
               type="email"
               value="your.email@example.com"
               disabled
-              className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-300"
+              className="w-full px-3 sm:px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-300 text-sm sm:text-base"
             />
             <p className="text-green-400 text-sm mt-2">Email entered</p>
           </div>
@@ -29,17 +29,17 @@ export default function TutorialPage() {
           </p>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
-          <h3 className="text-lg font-semibold text-white mb-2">Step 2: Enter Product URL</h3>
-          <p className="text-neutral-400 mb-3">
+        <div className="border-t border-neutral-800 pt-6 sm:pt-8">
+          <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Step 2: Enter Product URL</h3>
+          <p className="text-neutral-400 mb-3 text-sm sm:text-base">
             Copy and paste the full URL of the Arc&apos;teryx product page you want to monitor.
           </p>
-          <div className="bg-neutral-800 p-4 rounded-md">
+          <div className="bg-neutral-800 p-3 sm:p-4 rounded-md">
             <input
               type="url"
               value="https://arcteryx.com/ca/en/shop/bird-head-toque"
               disabled
-              className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-300"
+              className="w-full px-3 sm:px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-300 text-sm sm:text-base truncate"
             />
             <p className="text-green-400 text-sm mt-2">URL entered</p>
           </div>
@@ -49,15 +49,15 @@ export default function TutorialPage() {
           </p>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
-          <h3 className="text-lg font-semibold text-white mb-2">Step 3: Click the Subscribe Button</h3>
-          <p className="text-neutral-400 mb-3">
+        <div className="border-t border-neutral-800 pt-6 sm:pt-8">
+          <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Step 3: Click the Subscribe Button</h3>
+          <p className="text-neutral-400 mb-3 text-sm sm:text-base">
             Once you&apos;ve entered both your email and product URL, click the Subscribe button.
           </p>
-          <div className="bg-neutral-800 p-4 rounded-md">
+          <div className="bg-neutral-800 p-3 sm:p-4 rounded-md">
             <button
               disabled
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md opacity-50 cursor-not-allowed"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md opacity-50 cursor-not-allowed text-sm sm:text-base"
             >
               Subscribe
             </button>
@@ -69,9 +69,9 @@ export default function TutorialPage() {
           </p>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
-          <h3 className="text-lg font-semibold text-white mb-2">Step 4: Check Your Email for Verification</h3>
-          <p className="text-neutral-400 mb-3">
+        <div className="border-t border-neutral-800 pt-6 sm:pt-8">
+          <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Step 4: Check Your Email for Verification</h3>
+          <p className="text-neutral-400 mb-3 text-sm sm:text-base">
             After clicking Subscribe, you&apos;ll receive a verification email. Click the link in the
             email to activate your subscription.
           </p>
@@ -81,11 +81,11 @@ export default function TutorialPage() {
           </p>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
-          <h3 className="text-lg font-semibold text-white mb-2">Step 5: Click the Verification Link</h3>
-          <p className="text-neutral-400">
+        <div className="border-t border-neutral-800 pt-6 sm:pt-8">
+          <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Step 5: Click the Verification Link</h3>
+          <p className="text-neutral-400 text-sm sm:text-base">
             Click the verification link in your email to activate your subscription. Once verified,
-            you&apos;ll start receiving stock alerts.
+            you will start receiving stock alerts.
           </p>
         </div>
       </div>

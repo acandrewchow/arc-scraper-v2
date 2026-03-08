@@ -8,9 +8,9 @@ export default function SubscriptionsPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-6">My Subscriptions</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">My Subscriptions</h1>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
             Enter your email to view subscriptions

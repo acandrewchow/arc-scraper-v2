@@ -87,23 +87,23 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
       {subscriptions.map((sub) => (
         <div
           key={sub.id}
-          className="border border-neutral-700 rounded-md p-4 space-y-2"
+          className="border border-neutral-700 rounded-md p-3 sm:p-4 space-y-2"
         >
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4">
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-neutral-400 mb-1">Product:</p>
               <a
                 href={sub.product_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:underline break-all text-sm"
+                className="text-blue-400 hover:underline break-all text-xs sm:text-sm"
               >
                 {sub.product_url}
               </a>
             </div>
-            <div className="ml-4 text-right flex-shrink-0">
+            <div className="sm:text-right flex-shrink-0">
               <span
-                className={`text-sm font-medium ${
+                className={`text-xs sm:text-sm font-medium ${
                   sub.verified ? 'text-green-400' : 'text-yellow-400'
                 }`}
               >

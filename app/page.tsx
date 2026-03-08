@@ -44,14 +44,14 @@ function HomeContent() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-2">Subscribe for Stock Alerts</h1>
-      <p className="text-neutral-400 mb-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Subscribe for Stock Alerts</h1>
+      <p className="text-neutral-400 mb-4 sm:mb-6 text-sm sm:text-base">
         Get notified when Arc&apos;teryx products come back in stock!
       </p>
 
       {verificationStatus && (
         <div
-          className={`mb-6 p-4 rounded-md text-sm ${
+          className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-md text-sm ${
             verificationStatus.success
               ? 'bg-green-900/40 text-green-300 border border-green-700'
               : 'bg-red-900/40 text-red-300 border border-red-700'
@@ -61,12 +61,12 @@ function HomeContent() {
         </div>
       )}
 
-      <div className="bg-blue-900/30 border border-blue-800 rounded-md p-4 mb-8 text-sm text-blue-200">
+      <div className="bg-blue-900/30 border border-blue-800 rounded-md p-3 sm:p-4 mb-6 sm:mb-8 text-sm text-blue-200">
         <strong>How it works:</strong> Subscribe with your email below. We will automatically
         check stock every 15 minutes and email you when items come back in stock.
       </div>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
         <SubscriptionForm />
       </div>
     </>
