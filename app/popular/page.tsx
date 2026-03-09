@@ -4,15 +4,17 @@ import PopularItemsList from '@/components/PopularItemsList';
 
 export default function PopularPage() {
   return (
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Popular Items</h1>
-      <p className="text-neutral-400 mb-4 sm:mb-6 text-sm sm:text-base">
-        See the most subscribed products and when each size/color last came back in stock.
-      </p>
-
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
-        <PopularItemsList />
+    <div className="animate-fade-in">
+      <div className="mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
+          Popular Items
+        </h1>
+        <p className="text-neutral-400 text-sm sm:text-[15px] leading-relaxed max-w-lg">
+          The most watched products and their latest stock activity.
+        </p>
       </div>
+
+      <PopularItemsList />
     </div>
   );
 }

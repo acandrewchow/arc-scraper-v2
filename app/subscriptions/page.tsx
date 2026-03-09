@@ -7,26 +7,35 @@ export default function SubscriptionsPage() {
   const [email, setEmail] = useState('');
 
   return (
-    <>
-      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">My Subscriptions</h1>
-
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
-            Enter your email to view subscriptions
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your.email@example.com"
-            className="w-full px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-md text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-        </div>
-
-        {email && email.includes('@') && <SubscriptionList email={email} />}
+    <div className="animate-fade-in">
+      <div className="mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
+          My Subscriptions
+        </h1>
+        <p className="text-neutral-400 text-sm sm:text-[15px] leading-relaxed max-w-lg">
+          View and manage your active stock alerts.
+        </p>
       </div>
-    </>
+
+      <div className="card p-5 sm:p-6">
+        <label htmlFor="email" className="block text-xs font-medium text-neutral-400 mb-2 uppercase tracking-wider">
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          className="input-field"
+        />
+
+        {email && email.includes('@') && (
+          <div className="mt-6 pt-6 border-t border-neutral-800/60">
+            <SubscriptionList email={email} />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

@@ -14,11 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-neutral-950 text-neutral-100 min-h-screen">
+      <body className="bg-[#09090b] text-neutral-100 min-h-screen flex flex-col">
         <Nav />
-        <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+        <main className="flex-1 container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-2xl">
           {children}
         </main>
+        <footer className="border-t border-neutral-800/40 py-6">
+          <p className="text-center text-xs text-neutral-600">
+            Arc&apos;teryx Stock Monitor &middot; Checks every 15 minutes
+          </p>
+        </footer>
       </body>
     </html>
   );

@@ -44,24 +44,24 @@ export default function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
-          Your Email
+        <label htmlFor="email" className="block text-xs font-medium text-neutral-400 mb-2 uppercase tracking-wider">
+          Email Address
         </label>
         <input
           type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="your.email@example.com"
+          placeholder="you@example.com"
           required
-          className="w-full px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-md text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="input-field"
         />
       </div>
 
       <div>
-        <label htmlFor="productUrl" className="block text-sm font-medium text-neutral-300 mb-2">
+        <label htmlFor="productUrl" className="block text-xs font-medium text-neutral-400 mb-2 uppercase tracking-wider">
           Product URL
         </label>
         <input
@@ -71,19 +71,19 @@ export default function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
           onChange={(e) => setProductUrl(e.target.value)}
           placeholder="https://arcteryx.com/ca/en/shop/..."
           required
-          className="w-full px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-md text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="input-field"
         />
-        <p className="mt-1 text-sm text-neutral-500">
-          Enter the full URL of the Arc&apos;teryx product page
+        <p className="mt-2 text-xs text-neutral-500">
+          Paste the full URL from the Arc&apos;teryx product page
         </p>
       </div>
 
       {message && (
         <div
-          className={`p-3 rounded-md text-sm ${
+          className={`p-3.5 rounded-xl text-sm font-medium animate-fade-in ${
             message.type === 'success'
-              ? 'bg-green-900/40 text-green-300 border border-green-700'
-              : 'bg-red-900/40 text-red-300 border border-red-700'
+              ? 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
+              : 'bg-red-500/10 text-red-400 ring-1 ring-red-500/20'
           }`}
         >
           {message.text}
@@ -93,9 +93,16 @@ export default function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="btn-primary"
       >
-        {loading ? 'Subscribing...' : 'Subscribe'}
+        {loading ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            Subscribing...
+          </span>
+        ) : (
+          'Subscribe'
+        )}
       </button>
     </form>
   );

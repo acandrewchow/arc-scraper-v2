@@ -71,51 +71,66 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
   };
 
   if (loading) {
-    return <div className="text-neutral-400 text-center py-4">Loading subscriptions...</div>;
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="w-5 h-5 border-2 border-neutral-700 border-t-blue-500 rounded-full animate-spin" />
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-red-400 py-4">{error}</div>;
+    return (
+      <div className="p-3.5 rounded-xl text-sm font-medium bg-red-500/10 text-red-400 ring-1 ring-red-500/20">
+        {error}
+      </div>
+    );
   }
 
   if (subscriptions.length === 0) {
-    return <div className="text-neutral-500 py-4">No subscriptions found for this email.</div>;
+    return (
+      <div className="text-center py-8">
+        <p className="text-sm text-neutral-500">No subscriptions found for this email.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 animate-fade-in">
+      <p className="text-xs text-neutral-500 uppercase tracking-wider font-medium mb-3">
+        {subscriptions.length} subscription{subscriptions.length !== 1 ? 's' : ''}
+      </p>
+
       {subscriptions.map((sub) => (
         <div
           key={sub.id}
-          className="border border-neutral-700 rounded-md p-3 sm:p-4 space-y-2"
+          className="rounded-xl bg-neutral-900/50 ring-1 ring-neutral-800/60 p-4 space-y-3"
         >
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4">
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-neutral-400 mb-1">Product:</p>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
+            <div className="min-w-0 flex-1">
               <a
                 href={sub.product_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:underline break-all text-xs sm:text-sm"
+                className="text-sm text-blue-400 hover:text-blue-300 break-all transition-colors leading-relaxed"
               >
                 {sub.product_url}
               </a>
             </div>
-            <div className="sm:text-right flex-shrink-0">
-              <span
-                className={`text-xs sm:text-sm font-medium ${
-                  sub.verified ? 'text-green-400' : 'text-yellow-400'
-                }`}
-              >
-                {sub.verified ? 'Verified' : 'Pending'}
-              </span>
-            </div>
+            <span
+              className={`badge flex-shrink-0 ${
+                sub.verified
+                  ? 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
+                  : 'bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/20'
+              }`}
+            >
+              {sub.verified ? 'Verified' : 'Pending'}
+            </span>
           </div>
 
           {sub.verified && (
             <button
               onClick={() => handleUnsubscribe(sub.id, sub.token)}
-              className="mt-2 px-4 py-1.5 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm transition-colors"
+              className="text-xs font-medium text-neutral-500 hover:text-red-400 transition-colors"
             >
               Unsubscribe
             </button>

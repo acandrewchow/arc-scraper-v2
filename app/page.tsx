@@ -43,39 +43,43 @@ function HomeContent() {
   };
 
   return (
-    <>
-      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Subscribe for Stock Alerts</h1>
-      <p className="text-neutral-400 mb-4 sm:mb-6 text-sm sm:text-base">
-        Get notified when Arc&apos;teryx products come back in stock!
-      </p>
+    <div className="animate-fade-in">
+      <div className="mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
+          Subscribe for Stock Alerts
+        </h1>
+        <p className="text-neutral-400 text-sm sm:text-[15px] leading-relaxed max-w-lg">
+          Get notified when Arc&apos;teryx products come back in stock.
+          We check inventory every 15 minutes.
+        </p>
+      </div>
 
       {verificationStatus && (
         <div
-          className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-md text-sm ${
+          className={`mb-6 p-3.5 rounded-xl text-sm font-medium animate-fade-in ${
             verificationStatus.success
-              ? 'bg-green-900/40 text-green-300 border border-green-700'
-              : 'bg-red-900/40 text-red-300 border border-red-700'
+              ? 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
+              : 'bg-red-500/10 text-red-400 ring-1 ring-red-500/20'
           }`}
         >
           {verificationStatus.message}
         </div>
       )}
 
-      <div className="bg-blue-900/30 border border-blue-800 rounded-md p-3 sm:p-4 mb-6 sm:mb-8 text-sm text-blue-200">
-        <strong>How it works:</strong> Subscribe with your email below. We will automatically
-        check stock every 15 minutes and email you when items come back in stock.
-      </div>
-
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
+      <div className="card p-5 sm:p-6">
         <SubscriptionForm />
       </div>
-    </>
+    </div>
   );
 }
 
 export default function Home() {
   return (
-    <Suspense fallback={<div className="text-neutral-400 text-center py-12">Loading...</div>}>
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-20">
+        <div className="w-5 h-5 border-2 border-neutral-700 border-t-blue-500 rounded-full animate-spin" />
+      </div>
+    }>
       <HomeContent />
     </Suspense>
   );
