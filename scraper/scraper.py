@@ -79,8 +79,8 @@ def get_all_colors(driver) -> List[str]:
 def get_all_sizes(driver) -> List[str]:
     """Extract all available size options from the page."""
     sizes = []
-    base_sizes = {'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '2X', '2XL', '3X', '3XL'}
-    size_order = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '2X', '2XL', '3X', '3XL']
+    base_sizes = {'XXS', 'XS', 'S', 'SM', 'M', 'L', 'LXL', 'XL', 'XXL', '2X', '2XL', '3X', '3XL', 'O/S', 'SRT', 'REG', 'TALL'}
+    size_order = ['XXS', 'XS', 'S', 'SM', 'M', 'L', 'LXL', 'XL', 'XXL', '2X', '2XL', '3X', '3XL', 'O/S', 'SRT', 'REG', 'TALL']
     size_variations = {'R', 'T', 'S'}
     
     def is_valid_size(size_str: str) -> bool:
@@ -314,10 +314,26 @@ def check_stock_status(product_url: str, headless: bool = True) -> Tuple[Optiona
         sizes = get_all_sizes(driver)
         has_sizes = len(sizes) > 0
         
+        print(f"   Product: {product_name}")
+        print(f"   Colors: {colors}")
+        if has_sizes:
+            print(f"   Sizes: {sizes}")
+        
         if has_sizes:
             stock_data = check_stock_with_sizes(driver, colors, sizes)
         else:
             stock_data = check_stock_colors_only(driver, colors)
+        
+        print(f"   Stock results:")
+        if has_sizes:
+            for color, sizes_stock in stock_data.items():
+                for size, in_stock in sizes_stock.items():
+                    status = "✅ IN STOCK" if in_stock else "❌ OUT OF STOCK"
+                    print(f"     {color} / {size}: {status}")
+        else:
+            for color, in_stock in stock_data.items():
+                status = "✅ IN STOCK" if in_stock else "❌ OUT OF STOCK"
+                print(f"     {color}: {status}")
         
         return stock_data, has_sizes, product_name
         
