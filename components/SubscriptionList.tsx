@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import UnsubscribeModal, { type UnsubscribeTarget } from '@/components/UnsubscribeModal';
 
 interface Subscription {
   id: string;
@@ -20,9 +21,13 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [unsubscribeTarget, setUnsubscribeTarget] = useState<UnsubscribeTarget | null>(null);
 
-  const fetchSubscriptions = useCallback(async () => {
-    setLoading(true);
+  const fetchSubscriptions = useCallback(async (options?: { quiet?: boolean }) => {
+    const quiet = options?.quiet ?? false;
+    if (!quiet) {
+      setLoading(true);
+    }
     setError(null);
     try {
       const response = await fetch(`/api/subscriptions?email=${encodeURIComponent(email)}`);
@@ -30,13 +35,17 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
 
       if (response.ok) {
         setSubscriptions(data.subscriptions || []);
-      } else {
+      } else if (!quiet) {
         setError(data.error || 'Failed to load subscriptions');
       }
     } catch (err) {
-      setError('Failed to load subscriptions');
+      if (!quiet) {
+        setError('Failed to load subscriptions');
+      }
     } finally {
-      setLoading(false);
+      if (!quiet) {
+        setLoading(false);
+      }
     }
   }, [email]);
 
@@ -45,30 +54,6 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
       fetchSubscriptions();
     }
   }, [email, fetchSubscriptions]);
-
-  const handleUnsubscribe = async (subscriptionId: string, token: string) => {
-    if (!confirm('Are you sure you want to unsubscribe?')) {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `/api/subscriptions?id=${subscriptionId}&token=${encodeURIComponent(token)}`,
-        { method: 'DELETE' }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        fetchSubscriptions();
-        alert('Unsubscribed successfully!');
-      } else {
-        alert(data.error || 'Failed to unsubscribe');
-      }
-    } catch (err) {
-      alert('Failed to unsubscribe');
-    }
-  };
 
   if (loading) {
     return (
@@ -96,6 +81,13 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
 
   return (
     <div className="space-y-3 animate-fade-in">
+      <UnsubscribeModal
+        open={unsubscribeTarget !== null}
+        target={unsubscribeTarget}
+        onClose={() => setUnsubscribeTarget(null)}
+        onUnsubscribed={() => fetchSubscriptions({ quiet: true })}
+      />
+
       <p className="text-xs text-neutral-500 uppercase tracking-wider font-medium mb-3">
         {subscriptions.length} subscription{subscriptions.length !== 1 ? 's' : ''}
       </p>
@@ -129,7 +121,14 @@ export default function SubscriptionList({ email }: SubscriptionListProps) {
 
           {sub.verified && (
             <button
-              onClick={() => handleUnsubscribe(sub.id, sub.token)}
+              type="button"
+              onClick={() =>
+                setUnsubscribeTarget({
+                  id: sub.id,
+                  token: sub.token,
+                  product_url: sub.product_url,
+                })
+              }
               className="text-xs font-medium text-neutral-500 hover:text-red-400 transition-colors"
             >
               Unsubscribe
